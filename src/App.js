@@ -1,19 +1,22 @@
+import './App.css';
+import {Routes , Route, BrowserRouter} from "react-router-dom";
 import React from 'react';
-import Planner from './components/planner';
-import NavBar from './components/navbar';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 
-const theme = createTheme();
+import MealPlanner from './pages/MealPlanner';
+import MealCollection from './pages/MealCollection';
+
 function App() {
-    return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NavBar/>
-      <Planner/>
+  return (
+    <div className="App">
+      <BrowserRouter>
+          <Routes>
+              <Route path='/' element={<MealPlanner/>}/>
+              <Route path='/meals' element={<MealCollection/>}/>
+          </Routes>
+      </BrowserRouter>
+    </div>
 
-    </ThemeProvider>
-    )
+  );
 }
 
 export default App;
