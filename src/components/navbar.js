@@ -18,8 +18,9 @@ export default function NavBar() {
     navigate('/meals', {state : {}})
   };
 
-  const popMeals = (event) => {};
-
+  const navCreate = (event) => {
+    navigate('/create', {state : {}})
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -47,7 +48,7 @@ export default function NavBar() {
           </Button>
           <Button
             id="nav-planner"
-            onClick={popMeals}
+            onClick={navCreate}
             color="inherit"
             sx={{ flexGrow: 1 }}
           >

@@ -10,7 +10,7 @@ export default function Planner() {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const test = ["Today"]
 
-  return (
+  /*return (
     <Box sx={{ width: '98%', mx: 'auto', mt: '5%'}}>
       <Grid container columnSpacing={{ xs: 1}}>
         {days.map((day, index) => (
@@ -23,9 +23,9 @@ export default function Planner() {
         ))}
       </Grid>
     </Box>
-  );
+  );*/
 
-  /*return (
+  return (
     <Box sx={{ width: '90%', mx: 'auto', mt: '8%'}}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
         {days.map((day, index) => (
@@ -35,5 +35,5 @@ export default function Planner() {
         ))}
       </Grid>
     </Box>
-  );*/
+  );
 }
