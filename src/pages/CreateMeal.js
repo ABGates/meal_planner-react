@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import {useState} from "react";
 
 import NavBar from '../components/navbar.js';
-import createMeal from '../services/MealService.js'
+import {createMeal} from '../services/MealService.js'
 
 const theme = createTheme();
 export default function CreateMeal() {
@@ -69,9 +69,7 @@ export default function CreateMeal() {
         "vegetarian": veg
       }
   
-      console.log("hi")
-      console.log(meal)
-      //createMeal(meal)
+      createMeal(meal)
   
     }
 
