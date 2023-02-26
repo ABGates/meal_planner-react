@@ -1,5 +1,4 @@
 import React from 'react';
-import NavBar from '../components/navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -14,12 +13,11 @@ import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import {useState} from "react";
 
+import NavBar from '../components/navbar.js';
+import createMeal from '../services/MealService.js'
+
 const theme = createTheme();
 export default function CreateMeal() {
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    };
 
     const [numericField, inputNumericField] = useState({
       error:false,
@@ -43,6 +41,39 @@ export default function CreateMeal() {
     const handleComp = (event) => {
       setComp(event.target.value);
     };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+  
+      const data = new FormData(event.currentTarget);
+      const ingredient_data = event.currentTarget.querySelector('.ingredient_list');
+      const ingredient_list = ingredient_data.querySelectorAll('input');
+
+      let ingredients = []
+      ingredient_list.forEach((field) => {
+        ingredients.push(field.value);
+      });
+
+      const meal = {
+        "base": data.get('base'),
+        "name": data.get('name'),
+        "calories": data.get('calories'),
+        "complexity": comp,
+        "ingredients": ingredients,
+        "macros": {
+          "carbs": data.get('carbs'),
+          "fats": data.get('fat'),
+          "proteins": data.get('protein')
+        },
+        "taste": taste,
+        "vegetarian": veg
+      }
+  
+      console.log("hi")
+      console.log(meal)
+      //createMeal(meal)
+  
+    }
 
     return (
     <ThemeProvider theme={theme}>
@@ -88,7 +119,7 @@ export default function CreateMeal() {
                                 />
                             </Grid>
                             {/* ingredients */} 
-                            <Grid item xs={12}>
+                            <Grid item xs={12} className="ingredient_list">
                               <Typography align="left">
                                 Ingredients:
                               </Typography>
@@ -97,9 +128,9 @@ export default function CreateMeal() {
                                   <Grid item xs = {4} key={count}>
                                     <TextField
                                           fullWidth
-                                          id="ingred"
+                                          id={"ingredients_".concat(count)}
                                           label="Ingredient"
-                                          name="ingred"
+                                          name="ingredients"
                                       />
                                   </Grid>
                                 ))}
@@ -147,9 +178,9 @@ export default function CreateMeal() {
                                       error = {numericField.error}
                                       required
                                       fullWidth
-                                      name="protien"
-                                      label= "Protien"
-                                      id="protien"
+                                      name="protein"
+                                      label= "Protein"
+                                      id="protein"
                                   />
                                 </Grid>
                                 <Grid item xs={4}>
