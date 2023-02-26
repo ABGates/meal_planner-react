@@ -1,5 +1,4 @@
 import React from 'react';
-import Planner from '../components/planner';
 import NavBar from '../components/navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

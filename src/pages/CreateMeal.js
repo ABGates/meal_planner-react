@@ -104,7 +104,6 @@ export default function CreateMeal() {
                                   </Grid>
                                 ))}
                               </Grid>
-                              
                               <Button
                                 onClick = {() => {
                                   let temp = [ ...ingredCount ];
@@ -129,12 +128,7 @@ export default function CreateMeal() {
                                 >
                                 Remove
                               </Button>
-
                             </Grid>
-
-
-
-
                             <Grid item xs={6}>
                                 <TextField
                                     error = {numericField.error}
