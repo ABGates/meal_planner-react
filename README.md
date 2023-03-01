@@ -1,3 +1,10 @@
+# Notes
+
+## Avoiding cors errors
+navigate to chrome.exe: `cd "C:\Program Files (x86)\Google\Chrome\Application"`
+run chrome in insecure mode: `.\chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security`
+
+# BEGIN REACT AUTO TEXT 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

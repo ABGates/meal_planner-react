@@ -42,6 +42,13 @@ export default function CreateMeal() {
       setComp(event.target.value);
     };
 
+    const parseBool = (s) => {
+      if ( s === "No"){
+        return false;
+      }
+      return true;
+    } 
+
     const handleSubmit = (event) => {
       event.preventDefault();
   
@@ -57,16 +64,17 @@ export default function CreateMeal() {
       const meal = {
         "base": data.get('base'),
         "name": data.get('name'),
-        "calories": data.get('calories'),
+        "calories": parseInt(data.get('calories')),
         "complexity": comp,
         "ingredients": ingredients,
         "macros": {
-          "carbs": data.get('carbs'),
-          "fats": data.get('fat'),
-          "proteins": data.get('protein')
+          "carbs": parseInt(data.get('carbs')),
+          "fats": parseInt(data.get('fat')),
+          "proteins": parseInt(data.get('protein'))
         },
-        "taste": taste,
-        "vegetarian": veg
+        "taste": parseInt(taste),
+        //refactor this it should use the menu item
+        "vegetarian": parseBool(veg)
       }
   
       createMeal(meal)
