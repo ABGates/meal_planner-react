@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
 import MealCard from './mealcard';
 import DayMeals from './daymeals';
 import Typography from '@mui/material/Typography';

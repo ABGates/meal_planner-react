@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
 import {useState} from "react";
 
 import NavBar from '../components/navbar.js';
@@ -27,6 +28,7 @@ export default function CreateMeal() {
     const [veg, setVeg] = React.useState('');
     const [taste, setTaste] = React.useState('');
     const [comp, setComp] = React.useState('');
+    const [alert, setAlert] = React.useState(false);
 
     const [ingredCount, setIngredCount] = React.useState([1]);
 
@@ -77,7 +79,10 @@ export default function CreateMeal() {
         "vegetarian": parseBool(veg)
       }
   
-      createMeal(meal)
+      createMeal(meal);
+
+      setAlert(true);
+      setTimeout( () => {setAlert(false) }, 3000);
   
     }
 
@@ -269,6 +274,7 @@ export default function CreateMeal() {
                     </Box>
                 </Box>
             </Container>
+            {alert ? <Alert severity="success">Create New Meal!</Alert> : null}
     </ThemeProvider>
     )
 }
