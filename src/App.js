@@ -4,6 +4,7 @@ import React from 'react';
 
 import MealPlanner from './pages/MealPlanner';
 import MealCollection from './pages/MealCollection';
+import CreateMeal from './pages/CreateMeal'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Routes>
               <Route path='/' element={<MealPlanner/>}/>
               <Route path='/meals' element={<MealCollection/>}/>
+              <Route path='/create' element={<CreateMeal/>}/>
           </Routes>
       </BrowserRouter>
     </div>

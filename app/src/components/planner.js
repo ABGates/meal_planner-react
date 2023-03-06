@@ -1,13 +1,14 @@
 import * as React from 'react';
+import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
+import Typography  from '@mui/material/Typography';
 import MealCard from './mealcard';
-import DayMeals from './daymeals';
-import Typography from '@mui/material/Typography';
+import DayMeals from './'
 
 export default function Planner() {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const test = ["Today"]
 
   return (
     <Box sx={{ width: '98%', mx: 'auto', mt: '5%'}}>
