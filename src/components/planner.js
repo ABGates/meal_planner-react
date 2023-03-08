@@ -17,7 +17,6 @@ export default function Planner() {
             <Typography>
               {day}
             </Typography>
-            <DayMeals/>
           </Grid>
         ))}
       </Grid>
