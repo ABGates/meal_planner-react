@@ -17,6 +17,7 @@ export default function MealCollection() {
     getAllMeals().then(response => {
       console.log(response.data)
       console.log(typeof(response.data))
+      setMeals(response.data)
     })
 
     return (
