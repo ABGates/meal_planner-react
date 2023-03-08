@@ -11,13 +11,13 @@ import { getAllMeals } from '../services/MealService';
 
 const theme = createTheme();
 export default function MealCollection() {
+  
+    var meals
 
-    let meals
-    
     getAllMeals().then(response => {
       console.log(response.data)
       console.log(typeof(response.data))
-      meals  = response.data
+      meals = response.data
     })
 
     return (
