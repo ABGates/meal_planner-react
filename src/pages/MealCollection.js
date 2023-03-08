@@ -13,8 +13,10 @@ const theme = createTheme();
 export default function MealCollection() {
 
     const [meals, setMeals] = React.useState([1,2]); 
-    let temp = getAllMeals()
-    console.log(temp)
+    
+    getAllMeals().then(response => {
+      console.log(response.data)
+    })
 
     return (
     <ThemeProvider theme={theme}>
