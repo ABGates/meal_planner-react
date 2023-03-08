@@ -16,8 +16,8 @@ export default function MealCollection() {
     
     useEffect(() => {
       getAllMeals().then(response => {
-        console.log(response.data)
-        console.log(typeof(response.data))
+        //console.log(response.data)
+        //console.log(typeof(response.data))
         setMeals(response.data)
       })
     }, []);
@@ -29,9 +29,9 @@ export default function MealCollection() {
 
       <Box sx={{ width: '90%', mx: 'auto', mt: '8%'}}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 1, md: 1 }}>
-        {meals.map((index) => (
+        {meals.map((meal, index) => (
           <Grid key={index} item xs={2} mr={10}>
-            <MealCard/>
+            <MealCard meal={meal}/>
           </Grid>
         ))}
       </Grid>

@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function MealCard(props) {
+
+  console.log(props.meal)
   return (
     <Card sx={{ minWidth: 175 }}>
       <CardContent>
