@@ -12,12 +12,12 @@ import { getAllMeals } from '../services/MealService';
 const theme = createTheme();
 export default function MealCollection() {
 
-    const [meals, setMeals] = React.useState([1,2]); 
+    let meals
     
     getAllMeals().then(response => {
       console.log(response.data)
       console.log(typeof(response.data))
-      setMeals(response.data)
+      meals  = response.data
     })
 
     return (
