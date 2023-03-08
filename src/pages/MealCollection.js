@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 import NavBar from '../components/navbar';
 import MealCard from '../components/mealcard';
@@ -11,14 +11,16 @@ import { getAllMeals } from '../services/MealService';
 
 const theme = createTheme();
 export default function MealCollection() {
-  
-    var meals
 
-    getAllMeals().then(response => {
-      console.log(response.data)
-      console.log(typeof(response.data))
-      meals = response.data
-    })
+    const [meals, setMeals] = useState([]); 
+    
+    useEffect(() => {
+      getAllMeals().then(response => {
+        console.log(response.data)
+        console.log(typeof(response.data))
+        setMeals(response.data)
+      })
+    }, []);
 
     return (
     <ThemeProvider theme={theme}>
