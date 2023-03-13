@@ -43,6 +43,28 @@ export async function getAllMeals() {
 
 }
 
+export async function getDateMeal(date) {
+
+    try{
+        const response = await axios.post(
+            'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/get-date-meal',
+            date, 
+            {
+                headers: {
+                    "access-control-allow-origin" : "*",
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }
+        );
+        return response;
+    }
+    catch(error) {
+        console.log(error)
+        return null;
+    }
+
+}
+
 
 export async function getMeal(meal) {
 
