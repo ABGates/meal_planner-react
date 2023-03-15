@@ -14,7 +14,7 @@ export default function MealCard(props) {
     <Card sx={{ minWidth: 175 }}>
       <CardContent>
         <Typography variant="h7" component="div">
-          {meal.name}
+          {meal.title}
         </Typography>
         <Typography variant="body2">
           {meal.ingredients}
