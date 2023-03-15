@@ -10,7 +10,7 @@ table = db.Table('meals')
 def respond(err, res=None):
     return {
         'statusCode': '400' if err else '200',
-        'body': json.dumps(res, default=lambda x: str(x) if isinstance(x, Decimal) else x),
+        'body': json.dumps(res, default = lambda x: str(x) if isinstance(x, Decimal) else x),
         'headers': {
             'Content-Type': 'application/json',
         },
@@ -21,9 +21,9 @@ def lambda_handler(event, context):
     try:
         payload = json.loads(event['body'])
         
-        meal = table.get_item(Key=payload)
+        meal = table.get_item(Key = payload)
 
         return respond(False, meal['Item'])
     
-    except Exception as e:
-        return respond(True, e) 
+    except Exception as err:
+        return respond(True, str(err)) 

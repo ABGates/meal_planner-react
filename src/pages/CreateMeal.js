@@ -64,8 +64,8 @@ export default function CreateMeal() {
       });
 
       const meal = {
-        "base": data.get('base'),
-        "name": data.get('name'),
+        "basal": data.get('basal'),
+        "title": data.get('name'),
         "calories": parseInt(data.get('calories')),
         "complexity": comp,
         "ingredients": ingredients,
@@ -124,9 +124,9 @@ export default function CreateMeal() {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="base"
+                                    id="basal"
                                     label= "Base Ingredient"
-                                    name="base"
+                                    name="basal"
                                 />
                             </Grid>
                             {/* ingredients */} 

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {useState, useEffect} from "react";
-import { startOfWeek, addDays, subDays } from 'date-fns'
+import { parseISO, format, startOfWeek, addDays, subDays } from 'date-fns'
 
 import MealCard from './mealcard';
 import { getDateMeal } from '../services/MealService';
@@ -13,19 +13,23 @@ export default function Planner(week) {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   
   const today = new Date()
-  const [weekStart, setWeekStart] = useState(); 
-  
+  //const [weekStart, setWeekStart] = useState(); 
+  let weekStart
   switch(week) {
     case -1:
-      setWeekStart( subDays( startOfWeek(today, {weekStartsOn: 1}), 7 ) );
+      weekStart = (subDays( startOfWeek(today, {weekStartsOn: 1}), 7));
       break;
     case 1:
-      setWeekStart( addDays( startOfWeek(today, {weekStartsOn: 1}), 7 ) );
+      weekStart = (addDays( startOfWeek(today, {weekStartsOn: 1}), 7));
       break;
     default:
-      setWeekStart(startOfWeek(today, {weekStartsOn: 1}));
+      weekStart = startOfWeek(today, {weekStartsOn: 1});
+      break;
   }
 
+  //weekStart = format(parseISO(weekStart), 'yyyy/MM/dd')
+  //console.log(typeof(weekStart))
+  //console.log("weekStart " + weekStart)
   const dates = [
     weekStart,
     addDays(weekStart,1),
@@ -34,23 +38,28 @@ export default function Planner(week) {
     addDays(weekStart,4),
     addDays(weekStart,5),
     addDays(weekStart,6)
-  ]
+  ].map((date, index) => {
+    return format(date, 'yyyy-MM-dd');
+  });
 
-  const meals = []
-  for (let i = 0; i < dates.length; i++) {
-    getDateMeal(dates[i]).then(response => {
-      //console.log(response.data)
-      //console.log(typeof(response.data))
-      meals.push(response.data)
-    })
-  } 
+  //console.log("flag1")
+  console.log("dates", dates)
+  //console.log("formatted: " + format(dates[1], 'yyyy/MM/dd'))
 
   //build list of lists (day,date,meal)
   const plan = []
   for (let i = 0; i < dates.length; i++) {
-    let day = [days[i], dates[i], meals[i]]
-    plan.push(day)
-  }
+
+    let day = [days[i], dates[i]]
+
+    getDateMeal(dates[i]).then(response => {
+      //console.log("f2 ",response.data)
+      //console.log("f3 " + typeof(response.data))
+      day.push(response.data)
+    }).then(plan.push(day))
+  } 
+
+  console.log("plan: ", plan)
 
   return (
     <Box sx={{ width: '98%', mx: 'auto', mt: '5%'}}>
@@ -58,9 +67,9 @@ export default function Planner(week) {
         {plan.map((day, index) => (
           <Grid key={index} item xs={1} mr={0} sx={{ minWidth:210, border:1, borderRadius: '16px' }}>
             <Typography>
-              {day[0]} " " {day[1]}
+              {day[0]} 
             </Typography>
-            <MealCard meal={day[2]}/>
+            { day[2] ? <MealCard meal={day[2]}/> : <Typography>Add Meal to Plan!</Typography> }
             <Button>Edit</Button>
           </Grid>
         ))}

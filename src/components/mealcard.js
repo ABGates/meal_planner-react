@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 export default function MealCard(props) {
 
   const meal = props.meal
-  //console.log(meal["base"])
+  //console.log(meal["basal"])
   //console.log(meal["name"])
   return (
     <Card sx={{ minWidth: 175 }}>

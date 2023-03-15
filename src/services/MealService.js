@@ -44,11 +44,12 @@ export async function getAllMeals() {
 }
 
 export async function getDateMeal(date) {
-
+    let date_payload = {"plan_date": date}
+    console.log("in meal service: ", date_payload)
     try{
         const response = await axios.post(
             'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/get-date-meal',
-            date, 
+            date_payload, 
             {
                 headers: {
                     "access-control-allow-origin" : "*",
@@ -56,10 +57,11 @@ export async function getDateMeal(date) {
                 }
             }
         );
+        console.log("success")
         return response;
     }
     catch(error) {
-        console.log(error)
+       // console.log("Error in getDateMeal", error)
         return null;
     }
 
