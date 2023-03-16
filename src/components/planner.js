@@ -2,15 +2,12 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import {useState, useEffect} from "react";
-import { parseISO, format, startOfWeek, addDays, subDays } from 'date-fns'
+import { format, startOfWeek, addDays, subDays } from 'date-fns'
 
 import MealCard from './mealcard';
 import { getDateMeal } from '../services/MealService';
 import PlanMealDialog from './plan_meal_dialog';
-
-
 
 export async function formatWeekPlan(dates, days) {
   let plan = [];
@@ -31,7 +28,7 @@ export async function formatWeekPlan(dates, days) {
   return plan;
 }
 
-export default function Planner(week) {
+export default function Planner(props) {
 
   const [plan, setPlan] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -40,7 +37,7 @@ export default function Planner(week) {
   
   const today = new Date()
   let weekStart
-  switch(week) {
+  switch(props.week) {
     case -1:
       weekStart = (subDays( startOfWeek(today, {weekStartsOn: 1}), 7));
       break;
