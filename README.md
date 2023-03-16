@@ -1,8 +1,15 @@
 # Notes
+ssh into ec2 server
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000
+npm start
+then go to public ip in insecure chrome tab
 
 ## Avoiding cors errors
 navigate to chrome.exe: `cd "C:\Program Files (x86)\Google\Chrome\Application"`
 run chrome in insecure mode: `.\chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security`
+
+
+
 
 # BEGIN REACT AUTO TEXT 
 # Getting Started with Create React App
