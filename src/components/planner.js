@@ -8,6 +8,7 @@ import { parseISO, format, startOfWeek, addDays, subDays } from 'date-fns'
 
 import MealCard from './mealcard';
 import { getDateMeal } from '../services/MealService';
+import PlanMealDialog from './plan_meal_dialog';
 
 
 
@@ -87,7 +88,7 @@ export default function Planner(week) {
               {day[0]} 
             </Typography>
             { day[2] ? <MealCard meal={day[2]}/> : <Typography>Add Meal to Plan!</Typography> }
-            <Button>Edit</Button>
+            <PlanMealDialog date={day[1]} />
           </Grid>
         ))}
       </Grid>
