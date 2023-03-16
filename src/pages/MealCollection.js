@@ -16,8 +16,6 @@ export default function MealCollection() {
     
     useEffect(() => {
       getAllMeals().then(response => {
-        //console.log(response.data)
-        //console.log(typeof(response.data))
         setMeals(response.data)
       })
     }, []);

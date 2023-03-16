@@ -16,7 +16,28 @@ export async function createMeal(meal) {
         return response;
     }
     catch(error) {
-        console.log(error)
+        console.log("Error in add-meal", error)
+        return null;
+    }
+
+}
+export async function addDateMeal(datemeal) {
+
+    try{
+        const response = await axios.post(
+            'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/add-date-meal', 
+            datemeal,
+            {
+                headers: {
+                    "access-control-allow-origin" : "*",
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }
+        );
+        return response;
+    }
+    catch(error) {
+        console.log("Error in add-date-meal", error)
         return null;
     }
 
@@ -37,15 +58,35 @@ export async function getAllMeals() {
         return response;
     }
     catch(error) {
-        console.log(error)
+        console.log("Error in getAllMeals", error)
         return null;
     }
 
 }
 
+export async function getDateMeal(date) {
+    let date_payload = {"plan_date": date}
+    try{
+        const response = await axios.post(
+            'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/get-date-meal',
+            date_payload, 
+            {
+                headers: {
+                    "access-control-allow-origin" : "*",
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }
+        );
+        console.log("success")
+        return response;
+    }
+    catch(error) {
+        console.log("Error in getDateMeal", error)
+        return null;
+    }
+}
 
 export async function getMeal(meal) {
-
     try{
         const response = await axios.post(
             'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/get-meal',
@@ -60,7 +101,7 @@ export async function getMeal(meal) {
         return response;
     }
     catch(error) {
-        console.log(error)
+        console.log("Error in getMeal", error)
         return null;
     }
 

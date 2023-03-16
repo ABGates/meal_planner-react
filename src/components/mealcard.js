@@ -8,13 +8,13 @@ import Typography from '@mui/material/Typography';
 export default function MealCard(props) {
 
   const meal = props.meal
-  //console.log(meal["base"])
+  //console.log(meal["basal"])
   //console.log(meal["name"])
   return (
     <Card sx={{ minWidth: 175 }}>
       <CardContent>
         <Typography variant="h7" component="div">
-          {meal.name}
+          {meal.title}
         </Typography>
         <Typography variant="body2">
           {meal.ingredients}

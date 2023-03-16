@@ -7,7 +7,7 @@ table = db.Table('meals')
 
 
 #auto-generated from AWS with modifications
-def respond(err, res=None):
+def respond(err, res = None):
     return {
         'statusCode': '400' if err else '200',
         'body': json.dumps(res),
@@ -23,31 +23,28 @@ def lambda_handler(event, context):
         
         if operation == "POST":
             payload = json.loads(event['body'])
-            valid, err = sanitize(payload)
+            sanitize(payload)
             
-            if valid:
-                return respond(False, table.put_item( Item = payload ))
-            else:
-                return respond(True, "Sanitization Failed: " + str(err))
+            return respond(False, table.put_item( Item = payload ))
             
         else:
             return respond(True, "Unsupported method: " + operation) 
     
-    except:
-        return respond(True, "Input Parsing Error: Bad input") 
+    except Exception as err:
+        return respond(True, str(err)) 
 
 
 #sanitizes input for the database
 def sanitize(payload):
     meal_schema = {
         "title": "Meal",
-        "description": "A meal object with name, calories, complexity, ingredients, macros, taste and vegetarian",
+        "description": "A meal object with name(title), calories, complexity, ingredients, macros, taste and vegetarian",
         "type": "object",
         "properties": {
-            "base": {
+            "basal": {
                 "type": "string"
             },
-            "name": {
+            "title": {
                 "type": "string"
             },
             "calories": {
@@ -91,13 +88,12 @@ def sanitize(payload):
                 "type": "boolean"
             }
         },
-        "required": ["base", "name", "calories", "complexity", "ingredients", "macros", "taste", "vegetarian"]
+        "required": ["basal", "title", "calories", "complexity", "ingredients", "macros", "taste", "vegetarian"]
     }
 
     try:
         validate(instance = payload, schema = meal_schema)
-        return True,None
     
-    except ValidationError as err:
-        return False,err
+    except ValidationError:
+        raise ValueError("Schema Sanitization Failed")
 
