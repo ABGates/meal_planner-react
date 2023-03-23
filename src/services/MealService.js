@@ -106,3 +106,29 @@ export async function getMeal(meal) {
     }
 
 }
+
+export async function pushGroceryList(grocery_list) {
+    try{
+        const payload = {
+            "headers":"9y]`H5hAggx=xQF",
+            "grocery_list":grocery_list
+        }
+
+        const response = await axios.post(
+            'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/push-grocery-list',
+            payload, 
+            {
+                headers: {
+                    "access-control-allow-origin" : "*",
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }
+        );
+        return response;
+    }
+    catch(error) {
+        console.log("Error in push grocery list", error)
+        return null;
+    }
+
+}

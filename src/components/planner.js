@@ -4,9 +4,10 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {useState, useEffect} from "react";
 import { format, startOfWeek, addDays, subDays } from 'date-fns'
+import Button from '@mui/material/Button';
 
 import MealCard from './mealcard';
-import { getDateMeal } from '../services/MealService';
+import { getDateMeal, pushGroceryList } from '../services/MealService';
 import PlanMealDialog from './plan_meal_dialog';
 
 export async function formatWeekPlan(dates, days) {
@@ -70,6 +71,16 @@ export default function Planner(props) {
     fetchWeekPlan();
   }, []);
 
+  const handleSendGroceryList = () => {
+    let groc_list = []
+    for (let i = 0; i < plan.length; i++ ){
+      if (plan[i][2] !== undefined && plan[i][2] !== null){
+        groc_list.push(plan[i][2]["ingredients"])
+      }
+    }
+    pushGroceryList(groc_list);
+  }
+
   if (loading || !plan){
     return (<Typography>Loading ... </Typography>)
   }
@@ -89,6 +100,8 @@ export default function Planner(props) {
           </Grid>
         ))}
       </Grid>
+
+      <Button onClick={()=>handleSendGroceryList()}>Send Grocery List</Button>
     </Box>
   );
 }
