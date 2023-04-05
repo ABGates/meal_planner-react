@@ -8,15 +8,19 @@ import {useState} from "react";
 import Planner from '../components/planner';
 import NavBar from '../components/navbar';
 import { getRecs } from '../services/MealService';
+import RecPlanner from '../components/rec_planner';
 
 const theme = createTheme();
 export default function MealPlanner() {
     const [week, setWeek] = useState(0)
+    const [meal_recs, setMeal_recs] = useState([])
+    const [recs_changed, setRecs_changed] = useState(false)
 
     const handleGetRecs = () => {
       getRecs().then(response=>{
-        console.log(response.data[1])
-      })
+        setMeal_recs(response.data[1])
+      }).finally(      
+        setRecs_changed(true))
     }
 
     return (
@@ -32,7 +36,8 @@ export default function MealPlanner() {
       
       <Planner week={week}/>
 
-      <Button onClick={() =>handleGetRecs()}>Get Meal Recommendations</Button>
+      <Button onClick={() =>handleGetRecs()}>Get Meal Recommendation</Button>
+      <RecPlanner recs = {meal_recs} recs_changed = {recs_changed} setRecs_changed = {setRecs_changed}/>
 
     </ThemeProvider>
     )
