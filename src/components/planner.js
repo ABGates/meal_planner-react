@@ -85,7 +85,7 @@ export default function Planner(props) {
     return (<Typography>Loading ... </Typography>)
   }
 
-  console.log("plan", plan)
+  //console.log("plan", plan)
 
   return (
     <Box sx={{ width: '98%', mx: 'auto', mt: '5%'}}>
