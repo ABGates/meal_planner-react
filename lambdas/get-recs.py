@@ -1,9 +1,9 @@
 import boto3
 import json
-from decimal import Decimal
+import random
 
-db = boto3.resource('dynamodb')
-table = db.Table('meals')
+s3 = boto3.resource('s3')
+bucket = 'mp-personalize'
 
 
 #auto-generated from AWS with modifications
@@ -21,11 +21,21 @@ def respond(err, res=None):
 
 def lambda_handler(event, context):
     try:
-        payload = json.loads(event['body'])
+        file = s3.Object(bucket, 'batch-2-output/mp-rec-predict.json.out')
+        it = file.get()['Body'].iter_lines()
         
-        meal = table.get_item(Key = payload)
+        all_recs = json.loads(next(it).decode('utf-8'))['output']['recommendedItems']
+        
+        recs = random.sample(all_recs, 7)
+        
+        rec_list = []
+        
+        for rec in recs:
+            split = rec.split(' - ')
+            rec_list.append((split[0],split[1]))
+        
+        return(False, rec_list)
 
-        return respond(False, meal['Item'])
     
     except Exception as err:
         return respond(True, str(err)) 

@@ -132,3 +132,24 @@ export async function pushGroceryList(grocery_list) {
     }
 
 }
+
+export async function getRecs(meal) {
+    try{
+        const response = await axios.post(
+            'https://7wszt61cwd.execute-api.us-east-1.amazonaws.com/default/get-recs',
+            meal, 
+            {
+                headers: {
+                    "access-control-allow-origin" : "*",
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }
+        );
+        return response;
+    }
+    catch(error) {
+        console.log("Error in getRecs", error)
+        return null;
+    }
+
+}

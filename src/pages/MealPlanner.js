@@ -1,15 +1,23 @@
 import React from 'react';
-import Planner from '../components/planner';
-import NavBar from '../components/navbar';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import {useState} from "react";
 
+import Planner from '../components/planner';
+import NavBar from '../components/navbar';
+import { getRecs } from '../services/MealService';
+
 const theme = createTheme();
 export default function MealPlanner() {
     const [week, setWeek] = useState(0)
+
+    const handleGetRecs = () => {
+      getRecs().then(response=>{
+        console.log(response.data[1])
+      })
+    }
 
     return (
     <ThemeProvider theme={theme}>
@@ -23,6 +31,8 @@ export default function MealPlanner() {
       </ButtonGroup>
       
       <Planner week={week}/>
+
+      <Button onClick={() =>handleGetRecs()}>Get Meal Recommendations</Button>
 
     </ThemeProvider>
     )
