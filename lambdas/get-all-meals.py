@@ -13,6 +13,8 @@ def respond(err, res=None):
         'body': json.dumps(res, default = lambda x: str(x) if isinstance(x, Decimal) else x),
         'headers': {
             'Content-Type': 'application/json',
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
         },
     }
 
